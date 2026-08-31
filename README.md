@@ -194,10 +194,10 @@ https://github.com/3037676975/project2.git
 main
 
 网站目录：
-/wwww/wwwroot/project2
+/www/wwwroot/project2
 ```
 
-> 实际目录应为 `/www/wwwroot/project2`。添加新项目时请为每个项目使用独立目录。
+添加新项目时请为每个项目使用独立目录。
 
 公开仓库优先使用 HTTPS Clone 地址，可以省去 SSH Deploy Key 的配置。
 
