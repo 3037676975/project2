@@ -1,0 +1,75 @@
+{
+  "project": "project2-cover-workflow-test",
+  "mode": "hybrid-image-first-dry-run",
+  "target_viewport": "1440x900",
+  "reference": "original cover concept designed for this test; no screenshot reference supplied",
+  "items": [
+    {
+      "id": "page-shell",
+      "region": "global",
+      "kind": "container",
+      "representation": "layout-html",
+      "visual_notes": "full-viewport dark navy canvas, subtle grid, soft radial glows",
+      "required": true
+    },
+    {
+      "id": "project-kicker",
+      "region": "hero",
+      "kind": "text",
+      "representation": "native-text",
+      "visual_notes": "small uppercase label: PROJECT 02 / AUTOMATION LAB",
+      "required": true
+    },
+    {
+      "id": "hero-title",
+      "region": "hero",
+      "kind": "text",
+      "representation": "native-text",
+      "visual_notes": "large two-line Chinese title with gradient emphasis",
+      "required": true
+    },
+    {
+      "id": "hero-subtitle",
+      "region": "hero",
+      "kind": "text",
+      "representation": "native-text",
+      "visual_notes": "short description of ChatGPT → GitHub → Webhook → Baota workflow",
+      "required": true
+    },
+    {
+      "id": "workflow-strip",
+      "region": "hero-right",
+      "kind": "card",
+      "representation": "complete-card-image",
+      "visual_notes": "futuristic glass workflow strip showing ChatGPT, GitHub, Webhook, Baota, Linux",
+      "required": true,
+      "dry_run_fallback": "HTML/CSS composite until green_source.png is generated"
+    },
+    {
+      "id": "status-badge",
+      "region": "hero-right",
+      "kind": "badge",
+      "representation": "green-source-image",
+      "visual_notes": "glowing green LIVE / AUTO DEPLOY badge",
+      "required": true,
+      "dry_run_fallback": "HTML/CSS badge"
+    },
+    {
+      "id": "terminal-card",
+      "region": "hero-right",
+      "kind": "card",
+      "representation": "complete-card-image",
+      "visual_notes": "dark terminal card with successful git pull and webhook deployment lines",
+      "required": true,
+      "dry_run_fallback": "HTML/CSS terminal card"
+    },
+    {
+      "id": "metrics-row",
+      "region": "bottom",
+      "kind": "card",
+      "representation": "layout-html",
+      "visual_notes": "three compact metric blocks: Git tracked, Webhook instant, Baota auto deploy",
+      "required": true
+    }
+  ]
+}
