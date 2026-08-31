@@ -1,107 +1,84 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project2 · AI 自动化部署实验室</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Project2 - ChatGPT + GitHub + Webhook + 宝塔 + Linux 自动化开发部署工作流">
+  <title>Project2 · AI 自动化部署工作流</title>
   <style>
     :root{
-      --bg:#07111f;--panel:rgba(11,24,42,.72);--line:rgba(148,163,184,.16);
-      --text:#eef7ff;--muted:#8ea2b8;--cyan:#58e6ff;--violet:#9c7cff;--green:#59f1a3;
+      --bg:#020816;--panel:#07152b;--panel2:#0a1b36;--line:rgba(104,172,255,.22);
+      --text:#f6f9ff;--muted:#94a9c7;--cyan:#35d9ff;--blue:#4c7cff;--purple:#b45cff;
+      --green:#39e895;--shadow:0 30px 90px rgba(0,0,0,.42)
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-    body{min-height:100vh;overflow-x:hidden;background:
-      radial-gradient(circle at 12% 18%,rgba(45,212,191,.12),transparent 28%),
-      radial-gradient(circle at 80% 20%,rgba(99,102,241,.20),transparent 34%),
-      radial-gradient(circle at 72% 78%,rgba(34,211,238,.10),transparent 28%),
-      #07111f}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 92%)}
-    .page{position:relative;max-width:1280px;margin:0 auto;padding:34px 34px 42px}
-    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:66px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;font-size:13px}
-    .brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 30px rgba(88,230,255,.22);display:grid;place-items:center;color:#06101c;font-weight:900}
-    .nav-pill{border:1px solid var(--line);background:rgba(255,255,255,.035);backdrop-filter:blur(16px);padding:9px 13px;border-radius:999px;color:#b9c7d5;font-size:12px}
-    .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:58px;align-items:center}
-    .kicker{display:inline-flex;align-items:center;gap:10px;color:#9fb1c3;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
-    .kicker i{width:30px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
-    h1{font-size:clamp(48px,6vw,84px);line-height:.98;letter-spacing:-.055em;margin:0 0 26px;max-width:760px}
-    h1 .accent{display:block;background:linear-gradient(90deg,#f8fbff 0%,var(--cyan) 40%,#b18cff 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{font-size:18px;line-height:1.8;color:var(--muted);max-width:640px;margin:0 0 34px}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 17px;border-radius:12px;text-decoration:none;font-weight:800;font-size:14px}
-    .btn-primary{background:linear-gradient(135deg,var(--cyan),#6aa5ff);color:#04111d;box-shadow:0 14px 40px rgba(88,230,255,.16)}
-    .btn-ghost{border:1px solid var(--line);color:#d9e5ef;background:rgba(255,255,255,.035)}
-    .visual{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
-    .orb{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(88,230,255,.24),rgba(112,75,255,.12) 46%,transparent 70%);filter:blur(3px)}
-    .stack{position:relative;width:100%;display:grid;gap:16px;transform:perspective(1200px) rotateY(-5deg) rotateX(2deg)}
-    .glass{border:1px solid rgba(148,163,184,.18);background:linear-gradient(180deg,rgba(15,31,52,.88),rgba(8,20,36,.82));box-shadow:0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(20px)}
-    .workflow{padding:18px;border-radius:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative}
-    .node{min-height:88px;border:1px solid rgba(255,255,255,.06);border-radius:15px;background:rgba(255,255,255,.025);padding:12px;display:flex;flex-direction:column;justify-content:space-between}
-    .node b{font-size:12px}.node span{font-size:10px;color:#7f94a9}.node .dot{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(88,230,255,.25),rgba(156,124,255,.22));color:#dffbff;font-size:11px}
-    .status{position:absolute;right:14px;top:-17px;border:1px solid rgba(89,241,163,.28);background:rgba(5,31,27,.78);color:#a8ffd2;padding:8px 11px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.12em;box-shadow:0 0 28px rgba(89,241,163,.12)}
-    .status:before{content:"";display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:7px;box-shadow:0 0 12px var(--green)}
-    .terminal{border-radius:22px;padding:18px 20px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.85;color:#91a5b7}
-    .term-top{display:flex;gap:7px;margin-bottom:14px}.term-top i{width:8px;height:8px;border-radius:50%;background:#42556a}.terminal strong{color:#d5f8ff}.ok{color:var(--green)}
-    .metrics{margin-top:70px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .metric{padding:18px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:#9eb0c0}
-    .metric b{display:block;color:#eef7ff;font-size:17px;margin-bottom:4px}.metric span{font-size:12px}.metric em{font-style:normal;color:var(--cyan);font-size:12px;font-weight:800}
-    .foot{margin-top:30px;padding-top:20px;border-top:1px solid rgba(148,163,184,.1);display:flex;justify-content:space-between;gap:20px;color:#65798d;font-size:11px}
-    @media(max-width:980px){.hero{grid-template-columns:1fr}.visual{min-height:auto}.metrics{grid-template-columns:1fr}.nav{margin-bottom:44px}}
-    @media(max-width:620px){.page{padding:24px 18px}.workflow{grid-template-columns:1fr 1fr}.node:last-child{grid-column:1/-1}.visual{overflow:hidden}.foot{flex-direction:column}}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;background:
+      radial-gradient(circle at 18% 22%,rgba(35,91,255,.17),transparent 28%),
+      radial-gradient(circle at 82% 22%,rgba(157,70,255,.18),transparent 30%),
+      linear-gradient(180deg,#03091a 0%,#010713 100%);overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.24;background-image:
+      linear-gradient(rgba(93,151,255,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(93,151,255,.055) 1px,transparent 1px);background-size:50px 50px;mask-image:linear-gradient(to bottom,#000,transparent 92%)}
+    .shell{width:min(1320px,calc(100% - 36px));margin:auto;position:relative}
+    nav{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(111,156,255,.16)}
+    .brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:850;letter-spacing:-.03em}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#39e7ff,#6168ff 56%,#ba5dff);box-shadow:0 0 26px rgba(66,156,255,.35);display:grid;place-items:center;color:#02101e;font-weight:950}
+    .navlinks{display:flex;gap:34px;color:#aabbd3;font-size:14px}.navlinks span:first-child{color:#55dfff}.github{padding:10px 15px;border:1px solid rgba(108,175,255,.35);border-radius:999px;color:#eaf4ff;text-decoration:none;background:rgba(12,31,62,.54)}
+    .hero{min-height:620px;padding:62px 0 34px;text-align:center;position:relative}.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid rgba(54,223,255,.36);background:linear-gradient(90deg,rgba(17,156,207,.18),rgba(130,70,255,.2));font-size:13px;color:#8fe9ff;margin-bottom:25px}
+    h1{font-size:clamp(48px,6vw,84px);line-height:1.06;margin:0 auto 20px;letter-spacing:-.055em;max-width:980px}.grad{background:linear-gradient(90deg,#75e9ff 5%,#738bff 50%,#d173ff 95%);background-clip:text;-webkit-background-clip:text;color:transparent}.sub{font-size:21px;color:#e5edf8;margin:0 0 12px}.desc{max-width:780px;margin:0 auto;color:var(--muted);line-height:1.9;font-size:15px}
+    .workflow{margin:58px auto 0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));align-items:center;max-width:1040px}.node{grid-column:span 1;min-width:0}.card{height:118px;border:1px solid rgba(78,177,255,.35);border-radius:18px;background:linear-gradient(180deg,rgba(15,37,70,.92),rgba(7,19,40,.88));box-shadow:0 18px 45px rgba(0,0,0,.28),inset 0 0 35px rgba(61,135,255,.045);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:22px;font-weight:900;border:1px solid rgba(118,225,255,.36);background:linear-gradient(145deg,rgba(59,236,255,.24),rgba(79,106,255,.21));box-shadow:0 0 28px rgba(60,166,255,.16)}.purple .icon{background:linear-gradient(145deg,rgba(180,92,255,.3),rgba(92,72,255,.22))}.green .icon{background:linear-gradient(145deg,rgba(36,226,150,.27),rgba(31,127,86,.2))}.node b{font-size:13px}.node small{color:#8299b7;font-size:10px}.arrow{font-size:27px;color:#55dfff;text-shadow:0 0 16px rgba(76,220,255,.5)}
+    .wave{height:120px;margin:-42px auto 0;max-width:1080px;opacity:.55;background:radial-gradient(ellipse at 50% 100%,rgba(81,45,255,.28),transparent 55%),repeating-radial-gradient(ellipse at 50% 110%,rgba(83,133,255,.22) 0 1px,transparent 1px 16px);mask-image:linear-gradient(to top,#000,transparent)}
+    .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:20px;padding:10px 0 52px}.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.feature,.terminal{border:1px solid var(--line);background:linear-gradient(180deg,rgba(10,27,55,.88),rgba(4,15,34,.9));border-radius:18px;box-shadow:var(--shadow)}.feature{padding:22px;min-height:130px}.ficon{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#357dff,#5c44ff);display:grid;place-items:center;margin-bottom:14px;box-shadow:0 0 26px rgba(73,111,255,.25)}.feature:nth-child(2) .ficon{background:linear-gradient(145deg,#55c7ff,#6b68ff)}.feature:nth-child(3) .ficon{background:linear-gradient(145deg,#4a91ff,#7f59ff)}.feature:nth-child(4) .ficon{background:linear-gradient(145deg,#c450ff,#7048ff)}.feature h3{margin:0 0 8px;font-size:17px}.feature p{margin:0;color:#8fa4c1;font-size:12px;line-height:1.75}
+    .terminal{overflow:hidden}.term-head{height:48px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(111,158,255,.15);color:#cdd9e9}.dots{display:flex;gap:7px}.dots i{width:9px;height:9px;border-radius:50%;background:#fb6972}.dots i:nth-child(2){background:#f7c64a}.dots i:nth-child(3){background:#4bcf74}.copy{font-size:11px;padding:6px 10px;border-radius:8px;background:#10294c;color:#aaccff}.code{padding:21px 26px 25px;font:13px/1.8 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#b9c9dc;white-space:pre-wrap}.n{display:inline-block;width:30px;color:#526784}.comment{color:#44e0a0}.cmd{color:#d8e7ff}.ok{color:#4df09a}
+    footer{text-align:center;color:#58708e;font-size:12px;padding:4px 0 42px}.live{color:#42e697}
+    @media(max-width:900px){.navlinks{display:none}.workflow{grid-template-columns:repeat(5,1fr);gap:8px}.arrow{display:none}.node{grid-column:span 1}.card{height:105px}.grid{grid-template-columns:1fr}.hero{padding-top:48px}}
+    @media(max-width:620px){.shell{width:min(100% - 22px,1320px)}nav{height:64px}.brand{font-size:18px}.github{font-size:12px}.hero{min-height:auto}.workflow{grid-template-columns:1fr 1fr}.node:last-of-type{grid-column:1/-1}.card{height:115px}.feature-grid{grid-template-columns:1fr}h1{font-size:43px}.sub{font-size:17px}}
   </style>
 </head>
 <body>
-  <main class="page">
-    <nav class="nav">
-      <div class="brand"><span class="brand-mark">P2</span>PROJECT TWO</div>
-      <div class="nav-pill">AI · Git · Webhook · Linux</div>
+  <div class="shell">
+    <nav>
+      <div class="brand"><span class="logo">P2</span>Project2</div>
+      <div class="navlinks"><span>首页</span><span>项目介绍</span><span>技术栈</span><span>部署指南</span><span>常见问题</span></div>
+      <a class="github" href="https://github.com/3037676975/project2" target="_blank" rel="noreferrer">● GitHub 仓库 ↗</a>
     </nav>
 
     <section class="hero">
-      <div>
-        <div class="kicker"><i></i>PROJECT 02 / AUTOMATION LAB</div>
-        <h1>把想法交给 AI，<span class="accent">把部署交给系统。</span></h1>
-        <p class="lead">这是一个自动化开发部署实验封面：ChatGPT 负责创作与修改，GitHub 负责版本，Webhook 触发宝塔，Linux 服务器自动同步上线。</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#workflow">查看自动化链路 →</a>
-          <a class="btn btn-ghost" href="https://github.com/3037676975/project2">GitHub / project2</a>
-        </div>
-      </div>
+      <div class="pill">⚡ AI 驱动 · 自动化部署</div>
+      <h1>把想法交给 <span class="grad">AI</span>，<br>把部署交给<span class="grad">系统。</span></h1>
+      <p class="sub">ChatGPT + GitHub + 宝塔 + Linux　自动化开发部署工作流</p>
+      <p class="desc">从需求到上线，AI 生成与修改代码，GitHub 管理版本，Webhook 自动触发宝塔拉取，让开发更简单，让部署更高效。</p>
 
-      <div class="visual" id="workflow">
-        <div class="orb"></div>
-        <div class="stack">
-          <section class="workflow glass">
-            <div class="status">LIVE · AUTO DEPLOY</div>
-            <div class="node"><div class="dot">AI</div><div><b>ChatGPT</b><span>Design & Code</span></div></div>
-            <div class="node"><div class="dot">GH</div><div><b>GitHub</b><span>Version Control</span></div></div>
-            <div class="node"><div class="dot">WH</div><div><b>Webhook</b><span>Push Trigger</span></div></div>
-            <div class="node"><div class="dot">BT</div><div><b>Baota</b><span>Auto Pull</span></div></div>
-            <div class="node"><div class="dot">LX</div><div><b>Linux</b><span>Live Server</span></div></div>
-          </section>
-
-          <section class="terminal glass">
-            <div class="term-top"><i></i><i></i><i></i></div>
-            <div><strong>$</strong> git pull origin main</div>
-            <div>remote: webhook received</div>
-            <div>deploy: syncing /www/wwwroot/project2</div>
-            <div class="ok">✓ deployment success · production updated</div>
-          </section>
-        </div>
+      <div class="workflow" id="workflow">
+        <div class="node"><div class="card"><div class="icon">AI</div><b>ChatGPT</b><small>生成代码 / 修改需求</small></div></div><div class="arrow">→</div>
+        <div class="node"><div class="card"><div class="icon">GH</div><b>GitHub</b><small>保存代码 / 版本管理</small></div></div><div class="arrow">→</div>
+        <div class="node purple"><div class="card"><div class="icon">WH</div><b>Webhook</b><small>自动触发 / 通知宝塔</small></div></div><div class="arrow">→</div>
+        <div class="node green"><div class="card"><div class="icon">BT</div><b>宝塔面板</b><small>自动拉取 / 部署项目</small></div></div><div class="arrow">→</div>
+        <div class="node"><div class="card"><div class="icon">LX</div><b>Linux 服务器</b><small>运行项目 / 访问网站</small></div></div>
       </div>
+      <div class="wave"></div>
     </section>
 
-    <section class="metrics">
-      <div class="metric"><div><b>Git Tracked</b><span>每一次修改都有版本记录</span></div><em>01</em></div>
-      <div class="metric"><div><b>Webhook Instant</b><span>Push 后自动触发部署</span></div><em>02</em></div>
-      <div class="metric"><div><b>Baota Auto Deploy</b><span>服务器无需手动上传文件</span></div><em>03</em></div>
+    <section class="grid">
+      <div class="feature-grid">
+        <article class="feature"><div class="ficon">⚡</div><h3>高效开发</h3><p>告别手动上传。ChatGPT 直接修改 GitHub，提交即进入部署流程。</p></article>
+        <article class="feature"><div class="ficon">◇</div><h3>稳定可靠</h3><p>Git 版本管理 + Webhook 触发，每一次部署过程都可追踪。</p></article>
+        <article class="feature"><div class="ficon">⚙</div><h3>灵活扩展</h3><p>同一套方式可继续用于 PHP、Node.js、Python 与 Docker 项目。</p></article>
+        <article class="feature"><div class="ficon">♥</div><h3>自动上线</h3><p>服务器跟随 main 分支更新，不再反复进入宝塔手动覆盖文件。</p></article>
+      </div>
+
+      <article class="terminal">
+        <div class="term-head"><strong>部署示例</strong><div class="dots"><i></i><i></i><i></i></div><span class="copy">AUTO DEPLOY</span></div>
+        <div class="code"><span class="n">1</span><span class="comment"># GitHub push received</span>
+<span class="n">2</span><span class="cmd">git pull origin main</span>
+<span class="n">3</span>remote: webhook received
+<span class="n">4</span>sync: /www/wwwroot/project2
+<span class="n">5</span>branch: main
+<span class="n">6</span><span class="ok">✓ deployment success</span>
+<span class="n">7</span><span class="ok">✓ production updated</span></div>
+      </article>
     </section>
 
-    <footer class="foot">
-      <span>PROJECT2 · COVER WORKFLOW TEST</span>
-      <span>ChatGPT → GitHub → Webhook → 宝塔 → Linux</span>
-    </footer>
-  </main>
+    <footer>Project2 · ChatGPT → GitHub → Webhook → 宝塔 → Linux · <span class="live">AUTO DEPLOY ONLINE</span></footer>
+  </div>
 </body>
 </html>
