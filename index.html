@@ -9,76 +9,148 @@
     :root{
       --bg:#020816;--panel:#07152b;--panel2:#0a1b36;--line:rgba(104,172,255,.22);
       --text:#f6f9ff;--muted:#94a9c7;--cyan:#35d9ff;--blue:#4c7cff;--purple:#b45cff;
-      --green:#39e895;--shadow:0 30px 90px rgba(0,0,0,.42)
+      --green:#39e895;--warning:#ffd166;--shadow:0 30px 90px rgba(0,0,0,.42)
     }
-    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}
     body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;background:
-      radial-gradient(circle at 18% 22%,rgba(35,91,255,.17),transparent 28%),
-      radial-gradient(circle at 82% 22%,rgba(157,70,255,.18),transparent 30%),
+      radial-gradient(circle at 18% 12%,rgba(35,91,255,.16),transparent 28%),
+      radial-gradient(circle at 82% 16%,rgba(157,70,255,.16),transparent 30%),
       linear-gradient(180deg,#03091a 0%,#010713 100%);overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.24;background-image:
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:
       linear-gradient(rgba(93,151,255,.055) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(93,151,255,.055) 1px,transparent 1px);background-size:50px 50px;mask-image:linear-gradient(to bottom,#000,transparent 92%)}
-    .shell{width:min(1320px,calc(100% - 36px));margin:auto;position:relative}
-    nav{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(111,156,255,.16)}
-    .brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:850;letter-spacing:-.03em}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#39e7ff,#6168ff 56%,#ba5dff);box-shadow:0 0 26px rgba(66,156,255,.35);display:grid;place-items:center;color:#02101e;font-weight:950}
-    .navlinks{display:flex;gap:34px;color:#aabbd3;font-size:14px}.navlinks span:first-child{color:#55dfff}.github{padding:10px 15px;border:1px solid rgba(108,175,255,.35);border-radius:999px;color:#eaf4ff;text-decoration:none;background:rgba(12,31,62,.54)}
-    .hero{min-height:620px;padding:62px 0 34px;text-align:center;position:relative}.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid rgba(54,223,255,.36);background:linear-gradient(90deg,rgba(17,156,207,.18),rgba(130,70,255,.2));font-size:13px;color:#8fe9ff;margin-bottom:25px}
-    h1{font-size:clamp(48px,6vw,84px);line-height:1.06;margin:0 auto 20px;letter-spacing:-.055em;max-width:980px}.grad{background:linear-gradient(90deg,#75e9ff 5%,#738bff 50%,#d173ff 95%);background-clip:text;-webkit-background-clip:text;color:transparent}.sub{font-size:21px;color:#e5edf8;margin:0 0 12px}.desc{max-width:780px;margin:0 auto;color:var(--muted);line-height:1.9;font-size:15px}
-    .workflow{margin:58px auto 0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));align-items:center;max-width:1040px}.node{grid-column:span 1;min-width:0}.card{height:118px;border:1px solid rgba(78,177,255,.35);border-radius:18px;background:linear-gradient(180deg,rgba(15,37,70,.92),rgba(7,19,40,.88));box-shadow:0 18px 45px rgba(0,0,0,.28),inset 0 0 35px rgba(61,135,255,.045);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:22px;font-weight:900;border:1px solid rgba(118,225,255,.36);background:linear-gradient(145deg,rgba(59,236,255,.24),rgba(79,106,255,.21));box-shadow:0 0 28px rgba(60,166,255,.16)}.purple .icon{background:linear-gradient(145deg,rgba(180,92,255,.3),rgba(92,72,255,.22))}.green .icon{background:linear-gradient(145deg,rgba(36,226,150,.27),rgba(31,127,86,.2))}.node b{font-size:13px}.node small{color:#8299b7;font-size:10px}.arrow{font-size:27px;color:#55dfff;text-shadow:0 0 16px rgba(76,220,255,.5)}
-    .wave{height:120px;margin:-42px auto 0;max-width:1080px;opacity:.55;background:radial-gradient(ellipse at 50% 100%,rgba(81,45,255,.28),transparent 55%),repeating-radial-gradient(ellipse at 50% 110%,rgba(83,133,255,.22) 0 1px,transparent 1px 16px);mask-image:linear-gradient(to top,#000,transparent)}
-    .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:20px;padding:10px 0 52px}.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.feature,.terminal{border:1px solid var(--line);background:linear-gradient(180deg,rgba(10,27,55,.88),rgba(4,15,34,.9));border-radius:18px;box-shadow:var(--shadow)}.feature{padding:22px;min-height:130px}.ficon{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#357dff,#5c44ff);display:grid;place-items:center;margin-bottom:14px;box-shadow:0 0 26px rgba(73,111,255,.25)}.feature:nth-child(2) .ficon{background:linear-gradient(145deg,#55c7ff,#6b68ff)}.feature:nth-child(3) .ficon{background:linear-gradient(145deg,#4a91ff,#7f59ff)}.feature:nth-child(4) .ficon{background:linear-gradient(145deg,#c450ff,#7048ff)}.feature h3{margin:0 0 8px;font-size:17px}.feature p{margin:0;color:#8fa4c1;font-size:12px;line-height:1.75}
-    .terminal{overflow:hidden}.term-head{height:48px;padding:0 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(111,158,255,.15);color:#cdd9e9}.dots{display:flex;gap:7px}.dots i{width:9px;height:9px;border-radius:50%;background:#fb6972}.dots i:nth-child(2){background:#f7c64a}.dots i:nth-child(3){background:#4bcf74}.copy{font-size:11px;padding:6px 10px;border-radius:8px;background:#10294c;color:#aaccff}.code{padding:21px 26px 25px;font:13px/1.8 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#b9c9dc;white-space:pre-wrap}.n{display:inline-block;width:30px;color:#526784}.comment{color:#44e0a0}.cmd{color:#d8e7ff}.ok{color:#4df09a}
-    footer{text-align:center;color:#58708e;font-size:12px;padding:4px 0 42px}.live{color:#42e697}
-    @media(max-width:900px){.navlinks{display:none}.workflow{grid-template-columns:repeat(5,1fr);gap:8px}.arrow{display:none}.node{grid-column:span 1}.card{height:105px}.grid{grid-template-columns:1fr}.hero{padding-top:48px}}
-    @media(max-width:620px){.shell{width:min(100% - 22px,1320px)}nav{height:64px}.brand{font-size:18px}.github{font-size:12px}.hero{min-height:auto}.workflow{grid-template-columns:1fr 1fr}.node:last-of-type{grid-column:1/-1}.card{height:115px}.feature-grid{grid-template-columns:1fr}h1{font-size:43px}.sub{font-size:17px}}
+      linear-gradient(90deg,rgba(93,151,255,.055) 1px,transparent 1px);background-size:50px 50px;mask-image:linear-gradient(to bottom,#000,transparent 96%)}
+    a{color:inherit}.shell{width:min(1320px,calc(100% - 36px));margin:auto;position:relative}
+    .nav-wrap{position:sticky;top:0;z-index:30;background:rgba(2,8,22,.76);backdrop-filter:blur(18px);border-bottom:1px solid rgba(111,156,255,.14)}
+    nav{height:74px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:850;letter-spacing:-.03em;text-decoration:none}.logo{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#39e7ff,#6168ff 56%,#ba5dff);box-shadow:0 0 26px rgba(66,156,255,.35);display:grid;place-items:center;color:#02101e;font-weight:950}
+    .navlinks{display:flex;gap:28px;color:#aabbd3;font-size:14px}.navlinks a{text-decoration:none;transition:.2s}.navlinks a:hover{color:#55dfff}.github{padding:10px 15px;border:1px solid rgba(108,175,255,.35);border-radius:999px;text-decoration:none;background:rgba(12,31,62,.54)}
+    .hero{min-height:650px;padding:72px 0 38px;text-align:center;position:relative}.pill{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;border:1px solid rgba(54,223,255,.36);background:linear-gradient(90deg,rgba(17,156,207,.18),rgba(130,70,255,.2));font-size:13px;color:#8fe9ff;margin-bottom:25px}
+    h1{font-size:clamp(48px,6vw,84px);line-height:1.06;margin:0 auto 20px;letter-spacing:-.055em;max-width:980px}.grad{background:linear-gradient(90deg,#75e9ff 5%,#738bff 50%,#d173ff 95%);background-clip:text;-webkit-background-clip:text;color:transparent}.sub{font-size:21px;color:#e5edf8;margin:0 0 12px}.desc{max-width:800px;margin:0 auto;color:var(--muted);line-height:1.9;font-size:15px}.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 17px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:800}.btn-primary{background:linear-gradient(135deg,var(--cyan),#6f79ff);color:#03111f}.btn-ghost{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#d9e8fb}
+    .workflow{margin:55px auto 0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));align-items:center;max-width:1040px}.node{grid-column:span 1;min-width:0}.card{height:118px;border:1px solid rgba(78,177,255,.35);border-radius:18px;background:linear-gradient(180deg,rgba(15,37,70,.92),rgba(7,19,40,.88));box-shadow:0 18px 45px rgba(0,0,0,.28),inset 0 0 35px rgba(61,135,255,.045);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:22px;font-weight:900;border:1px solid rgba(118,225,255,.36);background:linear-gradient(145deg,rgba(59,236,255,.24),rgba(79,106,255,.21));box-shadow:0 0 28px rgba(60,166,255,.16)}.purple .icon{background:linear-gradient(145deg,rgba(180,92,255,.3),rgba(92,72,255,.22))}.green .icon{background:linear-gradient(145deg,rgba(36,226,150,.27),rgba(31,127,86,.2))}.node b{font-size:13px}.node small{color:#8299b7;font-size:10px}.arrow{font-size:27px;color:#55dfff;text-shadow:0 0 16px rgba(76,220,255,.5)}
+    .section{padding:82px 0;border-top:1px solid rgba(111,158,255,.09)}.eyebrow{font-size:12px;color:#64dfff;letter-spacing:.15em;text-transform:uppercase;font-weight:850}.section h2{font-size:clamp(32px,4vw,52px);margin:10px 0 14px;letter-spacing:-.04em}.section-lead{color:var(--muted);line-height:1.9;max-width:780px;margin:0 0 34px}.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(10,27,55,.88),rgba(4,15,34,.9));border-radius:20px;box-shadow:var(--shadow);padding:26px}.panel h3{margin:0 0 12px;font-size:19px}.panel p{margin:0;color:#91a6c3;line-height:1.85;font-size:14px}.panel ul{padding-left:20px;color:#9cb0cb;line-height:1.9;font-size:14px}.quote{padding:22px;border-left:3px solid var(--cyan);background:rgba(53,217,255,.06);border-radius:0 16px 16px 0;color:#d8ebff;line-height:1.85}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}.stat{padding:20px;border:1px solid var(--line);border-radius:16px;background:rgba(10,26,50,.62)}.stat b{display:block;font-size:25px;margin-bottom:5px}.stat span{color:#8fa5c2;font-size:12px}
+    .stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.stack-card{padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(12,31,61,.88),rgba(5,17,35,.88));min-height:160px}.stack-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:900;background:linear-gradient(145deg,#2acdf7,#645dff);margin-bottom:16px}.stack-card:nth-child(3n) .stack-icon{background:linear-gradient(145deg,#a757ff,#6546ff)}.stack-card:nth-child(4n) .stack-icon{background:linear-gradient(145deg,#32dc98,#16885c)}.stack-card h3{margin:0 0 8px;font-size:16px}.stack-card p{margin:0;color:#8fa4c1;line-height:1.75;font-size:12px}
+    .deploy-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}.steps{counter-reset:step}.step{position:relative;padding:0 0 24px 56px}.step:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,#3ddcf9,#625dff);color:#04101e;font-weight:950}.step:after{content:"";position:absolute;left:18px;top:43px;bottom:4px;width:1px;background:linear-gradient(var(--cyan),transparent)}.step:last-child:after{display:none}.step h3{margin:0 0 8px;font-size:16px}.step p{margin:0;color:#8fa4c1;line-height:1.75;font-size:13px}.codebox{border:1px solid var(--line);background:#020914;border-radius:17px;overflow:hidden}.code-head{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid rgba(111,158,255,.13);color:#c9d9ee;font-size:12px}.code{padding:20px;font:12.5px/1.85 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#c7d8ec;white-space:pre-wrap;overflow:auto}.c-green{color:#49e49d}.c-cyan{color:#67ddff}.notice{margin-top:14px;padding:14px 16px;border:1px solid rgba(255,209,102,.24);background:rgba(255,209,102,.06);color:#dacb98;border-radius:13px;font-size:12px;line-height:1.75}
+    .faq{display:grid;gap:12px}.faq details{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(10,27,55,.82),rgba(4,15,34,.86));overflow:hidden}.faq summary{cursor:pointer;list-style:none;padding:20px 22px;font-weight:750}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";float:right;color:var(--cyan);font-size:20px}.faq details[open] summary:after{content:"−"}.faq-answer{padding:0 22px 22px;color:#90a6c3;line-height:1.8;font-size:13px}.faq-answer code{color:#8feaff;background:#06101f;padding:2px 6px;border-radius:6px}
+    .cta-final{text-align:center;padding:78px 24px;border:1px solid rgba(93,153,255,.2);border-radius:24px;background:radial-gradient(circle at 50% 10%,rgba(108,81,255,.15),transparent 40%),linear-gradient(180deg,rgba(8,24,50,.88),rgba(3,13,29,.9));margin:16px 0 60px}.cta-final h2{margin:0 0 12px;font-size:clamp(30px,4vw,48px)}.cta-final p{color:#8ea5c1;max-width:700px;margin:0 auto 24px;line-height:1.8}
+    footer{text-align:center;color:#58708e;font-size:12px;padding:8px 0 42px}.live{color:#42e697}
+    @media(max-width:980px){.navlinks{display:none}.workflow{grid-template-columns:repeat(5,1fr);gap:8px}.arrow{display:none}.two-col,.deploy-layout{grid-template-columns:1fr}.stack-grid,.stats{grid-template-columns:1fr 1fr}.hero{padding-top:54px}}
+    @media(max-width:620px){.shell{width:min(100% - 22px,1320px)}nav{height:64px}.brand{font-size:18px}.github{font-size:11px;padding:9px 12px}.workflow{grid-template-columns:1fr 1fr}.node:last-of-type{grid-column:1/-1}.card{height:115px}.stack-grid,.stats{grid-template-columns:1fr}h1{font-size:43px}.sub{font-size:17px}.section{padding:62px 0}.panel{padding:20px}}
   </style>
 </head>
 <body>
-  <div class="shell">
-    <nav>
-      <div class="brand"><span class="logo">P2</span>Project2</div>
-      <div class="navlinks"><span>首页</span><span>项目介绍</span><span>技术栈</span><span>部署指南</span><span>常见问题</span></div>
-      <a class="github" href="https://github.com/3037676975/project2" target="_blank" rel="noreferrer">● GitHub 仓库 ↗</a>
-    </nav>
+  <div class="nav-wrap">
+    <div class="shell">
+      <nav>
+        <a class="brand" href="#home"><span class="logo">P2</span>Project2</a>
+        <div class="navlinks">
+          <a href="#home">首页</a><a href="#about">项目介绍</a><a href="#stack">技术栈</a><a href="#deploy">部署指南</a><a href="#faq">常见问题</a>
+        </div>
+        <a class="github" href="https://github.com/3037676975/project2" target="_blank" rel="noreferrer">GitHub 仓库 ↗</a>
+      </nav>
+    </div>
+  </div>
 
-    <section class="hero">
+  <main class="shell">
+    <section class="hero" id="home">
       <div class="pill">⚡ AI 驱动 · 自动化部署</div>
       <h1>把想法交给 <span class="grad">AI</span>，<br>把部署交给<span class="grad">系统。</span></h1>
-      <p class="sub">ChatGPT + GitHub + 宝塔 + Linux　自动化开发部署工作流</p>
-      <p class="desc">从需求到上线，AI 生成与修改代码，GitHub 管理版本，Webhook 自动触发宝塔拉取，让开发更简单，让部署更高效。</p>
+      <p class="sub">ChatGPT + GitHub + Webhook + 宝塔 + Linux</p>
+      <p class="desc">Project2 用来验证一套可以长期复用的自动化开发部署工作流：ChatGPT 负责写代码，GitHub 负责版本，Webhook 通知宝塔，Linux 服务器自动拉取上线。</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#deploy">查看部署指南 →</a><a class="btn btn-ghost" href="#about">了解项目</a></div>
 
-      <div class="workflow" id="workflow">
+      <div class="workflow">
         <div class="node"><div class="card"><div class="icon">AI</div><b>ChatGPT</b><small>生成代码 / 修改需求</small></div></div><div class="arrow">→</div>
         <div class="node"><div class="card"><div class="icon">GH</div><b>GitHub</b><small>保存代码 / 版本管理</small></div></div><div class="arrow">→</div>
-        <div class="node purple"><div class="card"><div class="icon">WH</div><b>Webhook</b><small>自动触发 / 通知宝塔</small></div></div><div class="arrow">→</div>
-        <div class="node green"><div class="card"><div class="icon">BT</div><b>宝塔面板</b><small>自动拉取 / 部署项目</small></div></div><div class="arrow">→</div>
-        <div class="node"><div class="card"><div class="icon">LX</div><b>Linux 服务器</b><small>运行项目 / 访问网站</small></div></div>
+        <div class="node purple"><div class="card"><div class="icon">WH</div><b>Webhook</b><small>Push 后自动触发</small></div></div><div class="arrow">→</div>
+        <div class="node green"><div class="card"><div class="icon">BT</div><b>宝塔面板</b><small>Git Pull / 项目部署</small></div></div><div class="arrow">→</div>
+        <div class="node"><div class="card"><div class="icon">LX</div><b>Linux 服务器</b><small>运行项目 / 对外访问</small></div></div>
       </div>
-      <div class="wave"></div>
     </section>
 
-    <section class="grid">
-      <div class="feature-grid">
-        <article class="feature"><div class="ficon">⚡</div><h3>高效开发</h3><p>告别手动上传。ChatGPT 直接修改 GitHub，提交即进入部署流程。</p></article>
-        <article class="feature"><div class="ficon">◇</div><h3>稳定可靠</h3><p>Git 版本管理 + Webhook 触发，每一次部署过程都可追踪。</p></article>
-        <article class="feature"><div class="ficon">⚙</div><h3>灵活扩展</h3><p>同一套方式可继续用于 PHP、Node.js、Python 与 Docker 项目。</p></article>
-        <article class="feature"><div class="ficon">♥</div><h3>自动上线</h3><p>服务器跟随 main 分支更新，不再反复进入宝塔手动覆盖文件。</p></article>
+    <section class="section" id="about">
+      <div class="eyebrow">About Project</div><h2>项目介绍</h2>
+      <p class="section-lead">Project2 不是为了展示一个复杂业务，而是专门验证“AI 写代码 → GitHub 保存 → Webhook 触发 → 宝塔拉取 → 服务器更新”这条链路能不能稳定复用。</p>
+      <div class="two-col">
+        <article class="panel"><h3>为什么做这个项目？</h3><p>过去每次修改网站，都需要复制代码、进入服务器、上传文件、覆盖目录。Project2 把这些重复动作拆开：代码只在 GitHub 里修改，服务器只负责自动同步，最终形成一套更接近真实开发团队的版本管理和部署方式。</p><div class="quote" style="margin-top:18px">核心原则：<strong>GitHub 是源代码唯一真相来源，服务器不手动改源码。</strong></div></article>
+        <article class="panel"><h3>这套工作流解决什么？</h3><ul><li>减少手动上传文件和覆盖错误。</li><li>每次修改都有 Git Commit，可以回溯历史。</li><li>ChatGPT 可以直接围绕仓库持续迭代。</li><li>同样的模式可以复制到 PHP、Node、Python、Docker 项目。</li><li>部署失败时可以从 Webhook 日志和 Git 日志定位问题。</li></ul></article>
       </div>
-
-      <article class="terminal">
-        <div class="term-head"><strong>部署示例</strong><div class="dots"><i></i><i></i><i></i></div><span class="copy">AUTO DEPLOY</span></div>
-        <div class="code"><span class="n">1</span><span class="comment"># GitHub push received</span>
-<span class="n">2</span><span class="cmd">git pull origin main</span>
-<span class="n">3</span>remote: webhook received
-<span class="n">4</span>sync: /www/wwwroot/project2
-<span class="n">5</span>branch: main
-<span class="n">6</span><span class="ok">✓ deployment success</span>
-<span class="n">7</span><span class="ok">✓ production updated</span></div>
-      </article>
+      <div class="stats"><div class="stat"><b>5</b><span>自动化链路节点</span></div><div class="stat"><b>main</b><span>生产同步分支</span></div><div class="stat"><b>Webhook</b><span>自动部署触发器</span></div><div class="stat"><b>Git</b><span>版本追踪基础</span></div></div>
     </section>
 
-    <footer>Project2 · ChatGPT → GitHub → Webhook → 宝塔 → Linux · <span class="live">AUTO DEPLOY ONLINE</span></footer>
-  </div>
+    <section class="section" id="stack">
+      <div class="eyebrow">Technology Stack</div><h2>技术栈</h2>
+      <p class="section-lead">这套项目刻意选择常见、容易维护的工具。每一个组件只负责一件事，降低自动化链路的复杂度。</p>
+      <div class="stack-grid">
+        <article class="stack-card"><div class="stack-icon">AI</div><h3>ChatGPT</h3><p>负责需求理解、页面设计、代码生成、修改与迭代。</p></article>
+        <article class="stack-card"><div class="stack-icon">GH</div><h3>GitHub</h3><p>负责源代码、Commit 历史、main 分支以及 Webhook 事件。</p></article>
+        <article class="stack-card"><div class="stack-icon">WH</div><h3>Webhook</h3><p>每次 main 分支 Push 后，自动通知宝塔开始部署。</p></article>
+        <article class="stack-card"><div class="stack-icon">BT</div><h3>宝塔面板</h3><p>负责站点、Git 拉取、Webhook 日志、Nginx 与服务器管理。</p></article>
+        <article class="stack-card"><div class="stack-icon">LX</div><h3>Linux</h3><p>实际运行项目，当前项目目录为 /www/wwwroot/project2。</p></article>
+        <article class="stack-card"><div class="stack-icon">NX</div><h3>Nginx</h3><p>负责网站访问入口、端口监听和静态 HTML 服务。</p></article>
+        <article class="stack-card"><div class="stack-icon">HT</div><h3>HTML / CSS</h3><p>Project2 当前使用纯前端静态页面，Git Pull 后即可直接生效。</p></article>
+        <article class="stack-card"><div class="stack-icon">GT</div><h3>Git</h3><p>负责 clone、pull、分支与本地工作目录状态管理。</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="deploy">
+      <div class="eyebrow">Deployment Guide</div><h2>部署指南</h2>
+      <p class="section-lead">下面记录的就是 Project2 实际使用的部署顺序。以后换服务器或新建项目，可以照着重新搭一遍。</p>
+      <div class="deploy-layout">
+        <div class="steps">
+          <div class="step"><h3>GitHub 创建仓库</h3><p>仓库名 project2，确保先有一次 Commit，让 main 分支真正存在。</p></div>
+          <div class="step"><h3>宝塔使用 Git 创建站点</h3><p>仓库填写 HTTPS 地址，分支选择 main，网站目录设置为 /www/wwwroot/project2。</p></div>
+          <div class="step"><h3>处理 safe.directory</h3><p>如果出现 dubious ownership，先把项目目录加入 Git 信任列表。</p></div>
+          <div class="step"><h3>配置 GitHub Webhook</h3><p>在项目 Settings → Webhooks 中粘贴宝塔生成的 Webhook URL，事件选择 Push。</p></div>
+          <div class="step"><h3>Push 触发部署</h3><p>ChatGPT 或其他开发工具提交到 main 后，GitHub 自动通知宝塔拉取。</p></div>
+          <div class="step"><h3>检查部署日志与访问</h3><p>宝塔 Git 管理中确认部署成功，再检查 Nginx、宝塔防火墙和云服务器安全组。</p></div>
+        </div>
+        <div>
+          <div class="codebox"><div class="code-head"><span>Project2 部署配置</span><span>AUTO DEPLOY</span></div><div class="code"><span class="c-green"># GitHub 仓库</span>
+https://github.com/3037676975/project2.git
+
+<span class="c-green"># 分支</span>
+main
+
+<span class="c-green"># 宝塔网站目录</span>
+/www/wwwroot/project2
+
+<span class="c-green"># 测试访问</span>
+43.172.76.33:28438
+
+<span class="c-green"># 第一次必须执行：修复 dubious ownership</span>
+<span class="c-cyan">git config --system --add safe.directory /www/wwwroot/project2</span>
+
+<span class="c-green"># 检查 Git 状态</span>
+<span class="c-cyan">git -C /www/wwwroot/project2 status</span>
+
+<span class="c-green"># 手动测试拉取</span>
+<span class="c-cyan">git -C /www/wwwroot/project2 pull origin main</span></div></div>
+          <div class="notice">注意：28438 是网站访问端口，不是 SSH 端口。若外网打不开，需要同时检查宝塔防火墙、云厂商安全组以及 Nginx 是否监听该端口。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="eyebrow">Frequently Asked Questions</div><h2>常见问题</h2>
+      <p class="section-lead">这里保留这次搭建过程中最容易再次遇到的问题，方便以后直接查。</p>
+      <div class="faq">
+        <details open><summary>为什么宝塔获取不到 main 分支？</summary><div class="faq-answer">如果 GitHub 仓库还是空仓库，main 只是默认分支名称，还没有真正产生 Git ref。先创建 <code>README.md</code> 或 <code>index.html</code> 并完成第一次 Commit，然后回宝塔刷新分支。</div></details>
+        <details><summary>为什么 Webhook 明明触发了，但服务器没有更新？</summary><div class="faq-answer">先看宝塔 Git 管理 → 部署记录。如果日志出现 <code>fatal: detected dubious ownership</code>，执行 <code>git config --system --add safe.directory /www/wwwroot/project2</code>，然后再次 Push。</div></details>
+        <details><summary>出现 dubious ownership 是什么意思？</summary><div class="faq-answer">这是 Git 的安全机制：执行 Git 的用户和仓库目录所有者不一致时，Git 会拒绝操作。只把你明确信任的项目目录加入 safe.directory，不建议全局通配所有目录。</div></details>
+        <details><summary>为什么 GitHub 已更新，但 43.172.76.33:28438 打不开？</summary><div class="faq-answer">Git 拉取成功和公网访问是两件事。检查网站是否运行、Nginx 是否监听 28438、宝塔安全端口是否放行、云服务器安全组是否允许 TCP 28438。</div></details>
+        <details><summary>以后还能直接在宝塔文件管理里改代码吗？</summary><div class="faq-answer">技术上可以，但不建议。服务器本地修改可能在下一次 Git Pull 时被覆盖或造成冲突。正确方式是修改 GitHub，再由 Webhook 自动同步。</div></details>
+        <details><summary>这套方案只能部署 HTML 吗？</summary><div class="faq-answer">不是。静态 HTML 最简单；PHP 通常 Git Pull 即可；Node / Next.js 需要安装依赖、构建和重启 PM2；Python 需要安装依赖并重启服务；Docker 可以在拉取后执行 docker compose up -d --build。</div></details>
+        <details><summary>API Key、数据库密码应该放哪里？</summary><div class="faq-answer">不要放进公开 GitHub。真实秘钥放在服务器环境变量或 <code>.env</code> 文件，并加入 <code>.gitignore</code>。Webhook Token、SSH 私钥、数据库密码同样不要写进公开仓库。</div></details>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <h2>从“手动上传”升级到“自动部署”</h2>
+      <p>Project2 的价值不是这个页面本身，而是验证了一套以后可以重复使用的开发基础设施。新项目只需要复制同样的 GitHub + Webhook + 宝塔流程即可。</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="https://github.com/3037676975/project2" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a><a class="btn btn-ghost" href="#home">返回首页 ↑</a></div>
+    </section>
+
+    <footer>Project2 · ChatGPT → GitHub → Webhook → 宝塔 → Linux · <span class="live">AUTO DEPLOY WORKFLOW</span></footer>
+  </main>
 </body>
 </html>
