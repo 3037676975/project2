@@ -3,21 +3,105 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project2 部署测试</title>
+  <title>Project2 · AI 自动化部署实验室</title>
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f7fb;color:#111827;display:grid;place-items:center;min-height:100vh}
-    .card{background:#fff;padding:36px 42px;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.08);text-align:center;max-width:640px}
-    h1{margin:0 0 12px;font-size:32px}
-    p{margin:8px 0;color:#4b5563;line-height:1.7}
-    .ok{display:inline-block;margin-top:18px;padding:10px 16px;border-radius:999px;background:#ecfdf5;color:#047857;font-weight:700}
+    :root{
+      --bg:#07111f;--panel:rgba(11,24,42,.72);--line:rgba(148,163,184,.16);
+      --text:#eef7ff;--muted:#8ea2b8;--cyan:#58e6ff;--violet:#9c7cff;--green:#59f1a3;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+    body{min-height:100vh;overflow-x:hidden;background:
+      radial-gradient(circle at 12% 18%,rgba(45,212,191,.12),transparent 28%),
+      radial-gradient(circle at 80% 20%,rgba(99,102,241,.20),transparent 34%),
+      radial-gradient(circle at 72% 78%,rgba(34,211,238,.10),transparent 28%),
+      #07111f}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 92%)}
+    .page{position:relative;max-width:1280px;margin:0 auto;padding:34px 34px 42px}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:66px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;font-size:13px}
+    .brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 30px rgba(88,230,255,.22);display:grid;place-items:center;color:#06101c;font-weight:900}
+    .nav-pill{border:1px solid var(--line);background:rgba(255,255,255,.035);backdrop-filter:blur(16px);padding:9px 13px;border-radius:999px;color:#b9c7d5;font-size:12px}
+    .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:58px;align-items:center}
+    .kicker{display:inline-flex;align-items:center;gap:10px;color:#9fb1c3;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:22px}
+    .kicker i{width:30px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+    h1{font-size:clamp(48px,6vw,84px);line-height:.98;letter-spacing:-.055em;margin:0 0 26px;max-width:760px}
+    h1 .accent{display:block;background:linear-gradient(90deg,#f8fbff 0%,var(--cyan) 40%,#b18cff 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:18px;line-height:1.8;color:var(--muted);max-width:640px;margin:0 0 34px}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 17px;border-radius:12px;text-decoration:none;font-weight:800;font-size:14px}
+    .btn-primary{background:linear-gradient(135deg,var(--cyan),#6aa5ff);color:#04111d;box-shadow:0 14px 40px rgba(88,230,255,.16)}
+    .btn-ghost{border:1px solid var(--line);color:#d9e5ef;background:rgba(255,255,255,.035)}
+    .visual{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
+    .orb{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(88,230,255,.24),rgba(112,75,255,.12) 46%,transparent 70%);filter:blur(3px)}
+    .stack{position:relative;width:100%;display:grid;gap:16px;transform:perspective(1200px) rotateY(-5deg) rotateX(2deg)}
+    .glass{border:1px solid rgba(148,163,184,.18);background:linear-gradient(180deg,rgba(15,31,52,.88),rgba(8,20,36,.82));box-shadow:0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(20px)}
+    .workflow{padding:18px;border-radius:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative}
+    .node{min-height:88px;border:1px solid rgba(255,255,255,.06);border-radius:15px;background:rgba(255,255,255,.025);padding:12px;display:flex;flex-direction:column;justify-content:space-between}
+    .node b{font-size:12px}.node span{font-size:10px;color:#7f94a9}.node .dot{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(88,230,255,.25),rgba(156,124,255,.22));color:#dffbff;font-size:11px}
+    .status{position:absolute;right:14px;top:-17px;border:1px solid rgba(89,241,163,.28);background:rgba(5,31,27,.78);color:#a8ffd2;padding:8px 11px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.12em;box-shadow:0 0 28px rgba(89,241,163,.12)}
+    .status:before{content:"";display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:7px;box-shadow:0 0 12px var(--green)}
+    .terminal{border-radius:22px;padding:18px 20px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.85;color:#91a5b7}
+    .term-top{display:flex;gap:7px;margin-bottom:14px}.term-top i{width:8px;height:8px;border-radius:50%;background:#42556a}.terminal strong{color:#d5f8ff}.ok{color:var(--green)}
+    .metrics{margin-top:70px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .metric{padding:18px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:#9eb0c0}
+    .metric b{display:block;color:#eef7ff;font-size:17px;margin-bottom:4px}.metric span{font-size:12px}.metric em{font-style:normal;color:var(--cyan);font-size:12px;font-weight:800}
+    .foot{margin-top:30px;padding-top:20px;border-top:1px solid rgba(148,163,184,.1);display:flex;justify-content:space-between;gap:20px;color:#65798d;font-size:11px}
+    @media(max-width:980px){.hero{grid-template-columns:1fr}.visual{min-height:auto}.metrics{grid-template-columns:1fr}.nav{margin-bottom:44px}}
+    @media(max-width:620px){.page{padding:24px 18px}.workflow{grid-template-columns:1fr 1fr}.node:last-child{grid-column:1/-1}.visual{overflow:hidden}.foot{flex-direction:column}}
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Project2 初始化成功</h1>
-    <p>这是 project2 的第一次 GitHub 提交。</p>
-    <p>现在回宝塔刷新分支，应该就能看到 main。</p>
-    <span class="ok">main 分支已创建</span>
+  <main class="page">
+    <nav class="nav">
+      <div class="brand"><span class="brand-mark">P2</span>PROJECT TWO</div>
+      <div class="nav-pill">AI · Git · Webhook · Linux</div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <div class="kicker"><i></i>PROJECT 02 / AUTOMATION LAB</div>
+        <h1>把想法交给 AI，<span class="accent">把部署交给系统。</span></h1>
+        <p class="lead">这是一个自动化开发部署实验封面：ChatGPT 负责创作与修改，GitHub 负责版本，Webhook 触发宝塔，Linux 服务器自动同步上线。</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#workflow">查看自动化链路 →</a>
+          <a class="btn btn-ghost" href="https://github.com/3037676975/project2">GitHub / project2</a>
+        </div>
+      </div>
+
+      <div class="visual" id="workflow">
+        <div class="orb"></div>
+        <div class="stack">
+          <section class="workflow glass">
+            <div class="status">LIVE · AUTO DEPLOY</div>
+            <div class="node"><div class="dot">AI</div><div><b>ChatGPT</b><span>Design & Code</span></div></div>
+            <div class="node"><div class="dot">GH</div><div><b>GitHub</b><span>Version Control</span></div></div>
+            <div class="node"><div class="dot">WH</div><div><b>Webhook</b><span>Push Trigger</span></div></div>
+            <div class="node"><div class="dot">BT</div><div><b>Baota</b><span>Auto Pull</span></div></div>
+            <div class="node"><div class="dot">LX</div><div><b>Linux</b><span>Live Server</span></div></div>
+          </section>
+
+          <section class="terminal glass">
+            <div class="term-top"><i></i><i></i><i></i></div>
+            <div><strong>$</strong> git pull origin main</div>
+            <div>remote: webhook received</div>
+            <div>deploy: syncing /www/wwwroot/project2</div>
+            <div class="ok">✓ deployment success · production updated</div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric"><div><b>Git Tracked</b><span>每一次修改都有版本记录</span></div><em>01</em></div>
+      <div class="metric"><div><b>Webhook Instant</b><span>Push 后自动触发部署</span></div><em>02</em></div>
+      <div class="metric"><div><b>Baota Auto Deploy</b><span>服务器无需手动上传文件</span></div><em>03</em></div>
+    </section>
+
+    <footer class="foot">
+      <span>PROJECT2 · COVER WORKFLOW TEST</span>
+      <span>ChatGPT → GitHub → Webhook → 宝塔 → Linux</span>
+    </footer>
   </main>
 </body>
 </html>
